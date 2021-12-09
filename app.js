@@ -45,6 +45,9 @@ app.use("/api", allRoutes);
 const authRoutes = require("./auth.routes");
 app.use("/api", authRoutes);
 
+const advertRoutes = require("./routes/advert.routes");
+app.use("/", advertRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
