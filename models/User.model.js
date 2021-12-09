@@ -3,6 +3,8 @@ const { Schema, model } = require("mongoose");
 // 1. Define your schema
 let UserSchema = new Schema({
   name: String,
+  required: true,
+
   email: {
     type: String,
     required: true,
@@ -14,7 +16,7 @@ let UserSchema = new Schema({
 });
 
 // 2. Define your model
-let User = model("user", UserSchema);
+let UserModel = model("user", UserSchema);
 
 // 3. Export your Model with 'module.exports'
-module.exports = User;
+module.exports = UserModel;
