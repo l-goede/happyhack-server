@@ -76,3 +76,5 @@ router.patch(`/adverts/:id`, (req, res) => {
     });
 
 })
+
+module.exports = router;
