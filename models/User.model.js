@@ -1,19 +1,36 @@
 const { Schema, model } = require("mongoose");
 
-// 1. Define your schema
-let UserSchema = new Schema({
-  name: String,
-  required: true,
-
-  email: {
-    type: String,
-    required: true,
+const UserSchema = new Schema(
+  {
+    name: String,
+    email: {
+      type: String,
+      required: true,
+    },
+    passwordHash: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    events: {
+      type: Array,
+    },
+    jobs: {
+      type: Array,
+    },
+    skills: {
+      type: String,
+    },
   },
-  passwordHash: {
-    type: String,
-    required: true,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 // 2. Define your model
 let UserModel = model("user", UserSchema);
