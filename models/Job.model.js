@@ -37,4 +37,4 @@ const jobSchema = new Schema({
 
 const JobModel = model("Job", userSchema);
 
-module.exports = obModel;
+module.exports = JobModel;
