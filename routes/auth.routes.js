@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
-//we installed bcrypt.js
 const bcrypt = require("bcryptjs");
-
 const UserModel = require("../models/User.model");
 
 router.post("/signup", (req, res) => {
   const { username, email, password } = req.body;
-  console.log(username, email, password);
 
   // -----SERVER SIDE VALIDATION ----------
   /* 
@@ -39,28 +35,27 @@ router.post("/signup", (req, res) => {
   // creating a salt
   let salt = bcrypt.genSaltSync(10);
   let hash = bcrypt.hashSync(password, salt);
+
   UserModel.create({ name: username, email, passwordHash: hash })
     .then((user) => {
-      // ensuring that we don't share the hash as well with the user
       user.passwordHash = "***";
       res.status(200).json(user);
     })
     .catch((err) => {
       if (err.code === 11000) {
         res.status(500).json({
-          errorMessage: "username or email entered already exists!",
+          errorMessage: "username or email already exists!",
           message: err,
         });
       } else {
         res.status(500).json({
-          errorMessage: "Something went wrong! Go to sleep!",
+          errorMessage: "Something went wrong! Are you drunk?",
           message: err,
         });
       }
     });
 });
 
-// will handle all POST requests to http:localhost:5005/api/signin
 router.post("/signin", (req, res) => {
   const { email, password } = req.body;
 
@@ -68,7 +63,7 @@ router.post("/signin", (req, res) => {
   /*
     if ( !email || !password) {
         res.status(500).json({
-            error: 'Please enter Username. email and password',
+            error: 'Please enter Username, email and password',
        })
       return;  
     }
@@ -81,7 +76,6 @@ router.post("/signin", (req, res) => {
     }
     */
 
-  // Find if the user exists in the database
   UserModel.findOne({ email })
     .then((userData) => {
       //check if passwords match
@@ -101,7 +95,7 @@ router.post("/signin", (req, res) => {
         return;
       }
     })
-    //throw an error if the user does not exists
+
     .catch((err) => {
       res.status(500).json({
         error: "Email does not exist",
@@ -111,14 +105,11 @@ router.post("/signin", (req, res) => {
     });
 });
 
-// will handle all POST requests to http:localhost:5005/api/logout
 router.post("/logout", (req, res) => {
   req.session.destroy();
-  // Nothing to send back to the user
   res.status(204).json({});
 });
 
-// middleware to check if user is loggedIn
 const isLoggedIn = (req, res, next) => {
   if (req.session.loggedInUser) {
     //calls whatever is to be executed after the isLoggedIn function is over
@@ -131,8 +122,6 @@ const isLoggedIn = (req, res, next) => {
   }
 };
 
-// THIS IS A PROTECTED ROUTE
-// will handle all get requests to http:localhost:5005/api/user
 router.get("/user", isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
 });

@@ -42,7 +42,7 @@ app.use(
 const allRoutes = require("./routes");
 app.use("/api", allRoutes);
 
-const authRoutes = require("./auth.routes");
+const authRoutes = require("./routes/auth.routes");
 app.use("/api", authRoutes);
 
 const advertRoutes = require("./routes/advert.routes");

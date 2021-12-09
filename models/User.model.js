@@ -32,8 +32,6 @@ const UserSchema = new Schema(
   }
 );
 
-// 2. Define your model
 let UserModel = model("user", UserSchema);
 
-// 3. Export your Model with 'module.exports'
 module.exports = UserModel;
