@@ -37,8 +37,3 @@ let UserModel = model("user", UserSchema);
 
 // 3. Export your Model with 'module.exports'
 module.exports = UserModel;
-
-
-const User = model("user", userSchema);
-
-module.exports = User;
