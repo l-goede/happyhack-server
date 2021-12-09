@@ -77,4 +77,4 @@ router.patch(`/adverts/:id`, (req, res) => {
 
 })
 
-module.exports = JobModel
+module.exports = router;
