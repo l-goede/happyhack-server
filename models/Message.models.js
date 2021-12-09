@@ -21,6 +21,6 @@ const msgSchema = new Schema({
   ],
 });
 
-const Msg = model("Msg", msgSchema);
+const MsgModel = model("Msg", msgSchema);
 
-module.exports = Msg;
+module.exports = MsgModel;
