@@ -7,6 +7,7 @@ const jobSchema = new Schema({
   },
   username: {
     type: Schema.Types.ObjectId,
+    ref: "user",
   },
   skills: {
     enum: [
@@ -21,20 +22,16 @@ const jobSchema = new Schema({
       "Research",
     ],
   },
-  details: [
-    {
-      type: String,
-    },
-  ],
-  date: [{ type: Date }],
-  price: {
-    type: Number,
-  },
+  details: String,
+  date: Date,
+  price: Number,
+
   contact: {
     type: Schema.Types.ObjectId,
+    ref: "user",
   },
 });
 
-const JobModel = model("Job", userSchema);
+const JobModel = model("Job", jobSchema);
 
 module.exports = JobModel;

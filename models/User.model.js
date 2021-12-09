@@ -24,12 +24,9 @@ const UserSchema = new Schema(
       type: Array,
     },
     skills: {
-      type: String,
+      type: Array,
     },
   },
-  {
-    timestamps: true,
-  }
 );
 
 // 2. Define your model
