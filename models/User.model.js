@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const UserSchema = new Schema(
+const userSchema = new Schema(
   {
     name: String,
     email: {
@@ -24,14 +24,14 @@ const UserSchema = new Schema(
       type: Array,
     },
     skills: {
-      type: String,
+      type: Array,
     },
   },
+  {
+    timestamps: true,
+  }
+);
 
-)
+let UserModel = model("user", userSchema);
 
-// 2. Define your model
-let UserModel = model("user", UserSchema);
-
-// 3. Export your Model with 'module.exports'
 module.exports = UserModel;

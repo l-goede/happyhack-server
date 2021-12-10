@@ -7,7 +7,7 @@ const jobSchema = new Schema({
   },
   username: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: "user",
   },
   skills: {
     enum: [
@@ -22,20 +22,12 @@ const jobSchema = new Schema({
       "Research",
     ],
   },
-  details:
-  
-  {
-      type: String,
-    },
-  
-    date:  Date,
-
-  price: {
-    type: Number,
-  },
+  details: String,
+  date: Date,
+  price: Number,
   contact: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: "user",
   },
 });
 
