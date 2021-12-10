@@ -6,6 +6,7 @@ const eventsSchema = new Schema({
   },
   username: {
     type: Schema.Types.ObjectId,
+    ref: "user",
     required: true,
   },
   location: {
@@ -14,6 +15,7 @@ const eventsSchema = new Schema({
   date: [{ type: Date }],
   contact: {
     type: Schema.Types.ObjectId,
+    ref: "user",
   },
   skills: {
     enum: [

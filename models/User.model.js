@@ -24,7 +24,7 @@ const userSchema = new Schema(
       type: Array,
     },
     skills: {
-      type: String,
+      type: Array,
     },
   },
   {
