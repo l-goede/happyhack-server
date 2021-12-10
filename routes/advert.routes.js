@@ -17,6 +17,20 @@ router.get("/adverts", (req, res) => {
     });
 });
 
+router.post("/create", (req, res) => {
+  const { name, details, skills, username, date, price, contact } = req.body;
+  AdvertModel.findById(req.params.advertsId)
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Something went wrong",
+        message: err,
+      });
+    });
+});
+
 //to create a new
 router.post("/create", (req, res) => {
   const { name, details, skills_needed, username } = req.body;
@@ -59,7 +73,7 @@ router.delete(`/adverts/:id`, (req, res) => {
 router.patch(`/adverts/:id`, (req, res) => {
   let id = req.params.id;
 
-  const { name, details, skills_needed, username } = req.body;
+  const { name, details, skills, username, date, price, contact } = req.body;
 
   AdvertModel.findByIdAndUpdate(
     id,
@@ -67,8 +81,11 @@ router.patch(`/adverts/:id`, (req, res) => {
       $set: {
         name: name,
         details: details,
-        skills_needed: skills_needed,
+        skills: skills,
         username: username,
+        date: date,
+        price: price,
+        contact: contact,
       },
     },
     { new: true }
