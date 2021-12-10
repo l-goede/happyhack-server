@@ -27,9 +27,7 @@ const UserSchema = new Schema(
       type: String,
     },
   },
-  {
-    timestamps: true,
-  }
+
 )
 
 // 2. Define your model
