@@ -75,10 +75,12 @@ router.post("/signin", (req, res) => {
         return;  
     }
     */
+  console.log(email, password);
 
   UserModel.findOne({ email })
     .then((userData) => {
       //check if passwords match
+      console.log("that data", userData);
       let doesItMatch = bcrypt.compareSync(password, userData.passwordHash);
       //if it matches
       if (doesItMatch) {
@@ -89,14 +91,15 @@ router.post("/signin", (req, res) => {
       }
       //if passwords do not match
       else {
+        console.log("password wrong ???");
         res.status(500).json({
           error: "Passwords don't match",
         });
         return;
       }
     })
-
     .catch((err) => {
+      console.log("is the error here ?");
       res.status(500).json({
         error: "Email does not exist",
         message: err,
