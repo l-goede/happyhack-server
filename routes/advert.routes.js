@@ -21,9 +21,10 @@ router.get('/jobs', (req, res) => {
 
 //to create a new 
 router.post('/create', (req, res) => {
-    const { name, details, skills, username, date, price, contact} = req.body;
+    const { name, details, date, price, skills } = req.body;
     console.log(req.body, name)
-    JobModel.create({name})
+    JobModel.create({name, details,skills, date, price})
+    .populate("id")
         .then((response) => {
             res.status(200).json(response)
         })

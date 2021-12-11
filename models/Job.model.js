@@ -5,10 +5,6 @@ const jobSchema = new Schema({
     type: String,
     required: true,
   },
-  username: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-  },
   skills: {
     enum: [
       "JavaScrip",
@@ -23,12 +19,15 @@ const jobSchema = new Schema({
     ],
   },
   details: String,
+  
   date: Date,
+
   price: Number,
+
   contact: {
     type: Schema.Types.ObjectId,
     ref: "user",
-  },
+  }
 });
 
 const JobModel = model("Job", jobSchema);
