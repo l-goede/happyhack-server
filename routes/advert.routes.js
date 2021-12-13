@@ -22,9 +22,8 @@ router.get('/jobs', (req, res) => {
 //to create a new 
 router.post('/create', (req, res) => {
     const { name, details, date, price, skills } = req.body;
-    console.log(req.body, name)
+    console.log(req.body)
     JobModel.create({name, details,skills, date, price})
-    .populate("id")
         .then((response) => {
             res.status(200).json(response)
         })
@@ -67,9 +66,9 @@ router.delete(`/jobs/:id`, (req, res) => {
 router.patch(`/jobs/:id`, (req, res) => {
     let id = req.params.id
 
-    const { name, details, skills, username, date, price, contact } = req.body;
+    const { name, details, username, date, price, contact } = req.body;
 
-    JobModel.findByIdAndUpdate(id, { $set: { name, details, skills, username, date, price, contact } }, { new: true })
+    JobModel.findByIdAndUpdate(id, { $set: { name, details, username, date, price, contact } }, { new: true })
 
         .then((jobs) => {
             res.status(200).json(jobs)
