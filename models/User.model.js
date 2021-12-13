@@ -14,20 +14,7 @@ const userSchema = new Schema({
     required: true,
   },
 
-  location: {
-    enum: [
-      "Amsterdam",
-      "Barcelona",
-      "Berlin",
-      "Bordeaux",
-      "Cologne",
-      "Lisbon",
-      "Madrid",
-      "Paris",
-      "Porto",
-      "Vienna",
-    ],
-  },
+  location: String,
 
   events: {
     type: Array,
