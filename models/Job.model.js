@@ -1,10 +1,12 @@
 const { Schema, model } = require("mongoose");
+require("./User.model");
+
 const jobSchema = new Schema({
   username: {
     type: Schema.Types.ObjectId,
     ref: "user",
   },
-  userImage: {
+  developer: {
     type: Schema.Types.ObjectId,
     ref: "user",
   },
@@ -14,7 +16,7 @@ const jobSchema = new Schema({
     required: true,
   },
 
-  jobDescription: { String },
+  jobDescription: String,
 
   skills: {
     enum: [
@@ -39,9 +41,9 @@ const jobSchema = new Schema({
     ],
   },
 
-  deadline: { Date },
+  deadline: Date,
 
-  price: { Number },
+  price: Number,
 
   accepted: Boolean,
   completed: Boolean,
