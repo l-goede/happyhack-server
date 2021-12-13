@@ -1,6 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
+  image: {
+    type: String,
+  },
   name: String,
   email: {
     type: String,
@@ -10,20 +13,55 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+
   location: {
-    type: String,
+    enum: [
+      "Amsterdam",
+      "Barcelona",
+      "Berlin",
+      "Bordeaux",
+      "Cologne",
+      "Lisbon",
+      "Madrid",
+      "Paris",
+      "Porto",
+      "Vienna",
+    ],
   },
-  image: {
-    type: String,
-  },
+
   events: {
     type: Array,
   },
-  jobs: {
+
+  jobsCreated: {
     type: Array,
   },
-  skills: {
+
+  jobsAccepted: {
     type: Array,
+  },
+
+  skills: {
+    enum: [
+      "Javascript",
+      "React",
+      "Typescript",
+      "Python",
+      "C#",
+      "Java",
+      "PHP",
+      "Angular",
+      "VueJS",
+      "NodeJS",
+      "ExpressJS",
+      "MongoDB",
+      "Mongoose",
+      "MySQL",
+      "RESTful API",
+      "UX/UI",
+      "Figma",
+      "Adobe XD",
+    ],
   },
 });
 

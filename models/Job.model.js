@@ -1,14 +1,23 @@
 const { Schema, model } = require("mongoose");
+require("./User.model");
+
 const jobSchema = new Schema({
   username: {
     type: Schema.Types.ObjectId,
     ref: "user",
   },
+  developer: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
+
   jobTitle: {
     type: String,
     required: true,
   },
-  jobDescription: { String },
+
+  jobDescription: String,
+
   skills: {
     enum: [
       "Javascript",
@@ -31,8 +40,11 @@ const jobSchema = new Schema({
       "Adobe XD",
     ],
   },
-  deadline: { Date },
-  price: { Number },
+
+  deadline: Date,
+
+  price: Number,
+
   accepted: Boolean,
   completed: Boolean,
 });
