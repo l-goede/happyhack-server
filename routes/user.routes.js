@@ -47,15 +47,13 @@ router.patch("/profile/:id", isLoggedIn, (req, res) => {
         name: name,
         location: location,
         image: image,
-        // events: events,
-        // jobs: jobs,
-        // skills: skills,
+        //skills: skills,
       },
     },
     { new: true }
   )
-
     .then((profile) => {
+      req.session.loggedInUser = profile
       res.status(200).json(profile);
     })
     .catch((err) => {});
