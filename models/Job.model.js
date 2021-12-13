@@ -1,35 +1,50 @@
 const { Schema, model } = require("mongoose");
-
 const jobSchema = new Schema({
-  name: {
+  username: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
+  userImage: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
+
+  jobTitle: {
     type: String,
     required: true,
   },
+
+  jobDescription: { String },
+
   skills: {
     enum: [
-      "JavaScrip",
-      "HTML",
-      "MongoDB",
-      "CSS",
-      "UI",
+      "Javascript",
+      "React",
+      "Typescript",
       "Python",
-      "Tableau",
-      "Design Thinking",
-      "Research",
+      "C#",
+      "Java",
+      "PHP",
+      "Angular",
+      "VueJS",
+      "NodeJS",
+      "ExpressJS",
+      "MongoDB",
+      "Mongoose",
+      "MySQL",
+      "RESTful API",
+      "UX/UI",
+      "Figma",
+      "Adobe XD",
     ],
   },
-  details: String,
-  
-  date: Date,
 
-  price: Number,
+  deadline: { Date },
 
-  contact: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-  }
+  price: { Number },
+
+  accepted: Boolean,
+  completed: Boolean,
 });
-
 const JobModel = model("Job", jobSchema);
-
 module.exports = JobModel;
