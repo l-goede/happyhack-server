@@ -21,6 +21,7 @@ router.get("/jobs", (req, res) => {
 router.post("/add-form", (req, res) => {
   const id = req.session.loggedInUser._id;
   console.log(id);
+ 
   const {
     jobTitle,
     jobDescription,
@@ -32,11 +33,14 @@ router.post("/add-form", (req, res) => {
     accepted,
   } = req.body;
   console.log(req.body);
+
+  let allSkills = skills.split(",")
+
   JobModel.create({
     username: id,
     jobTitle,
     jobDescription,
-    skills,
+    skills: allSkills,
 
     deadline,
     price,
@@ -80,7 +84,6 @@ router.delete(`/jobs/:id`, (req, res) => {
 // to update the data from the advert
 router.patch(`/jobs/:id`, (req, res) => {
   let id = req.params.id;
-
   const {
     username,
     jobTitle,
@@ -92,7 +95,7 @@ router.patch(`/jobs/:id`, (req, res) => {
     completed,
     accepted,
   } = req.body;
-
+  let allSkills = skills.split(",")
   JobModel.findByIdAndUpdate(
     id,
     {
@@ -100,7 +103,7 @@ router.patch(`/jobs/:id`, (req, res) => {
         username,
         jobTitle,
         jobDescription,
-        skills,
+        skills: allSkills,
 
         deadline,
         price,
