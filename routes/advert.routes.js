@@ -25,7 +25,6 @@ router.post("/add-form", (req, res) => {
     jobTitle,
     jobDescription,
     skills,
-
     deadline,
     price,
     completed,
