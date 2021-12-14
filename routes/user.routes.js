@@ -38,16 +38,19 @@ router.post("/profile/:userId", isLoggedIn, (req, res) => {
 router.patch("/profile/:id", isLoggedIn, (req, res) => {
   let id = req.params.id;
   console.log(id)
-  const { name, location, image } = req.body;
+  const { name, lastName, location, image, aboutMe, skills} = req.body;
+  let allSkills = skills.split(",")
 
   UserModel.findByIdAndUpdate(
     id,
     {
       $set: {
         name: name,
+        lastName: lastName,
         location: location,
         image: image,
-        //skills: skills,
+        skills: allSkills,
+        aboutMe: aboutMe,
       },
     },
     { new: true }

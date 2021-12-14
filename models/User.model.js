@@ -3,8 +3,10 @@ const { Schema, model } = require("mongoose");
 const userSchema = new Schema({
   image: {
     type: String,
+    default: 'https://i.pinimg.com/474x/5f/3b/48/5f3b486198cb4e1db5729207a666c750.jpg' 
   },
   name: String,
+  lastName: String,
   email: {
     type: String,
     required: true,
@@ -28,28 +30,10 @@ const userSchema = new Schema({
     type: Array,
   },
 
-  skills: {
-    enum: [
-      "Javascript",
-      "React",
-      "Typescript",
-      "Python",
-      "C#",
-      "Java",
-      "PHP",
-      "Angular",
-      "VueJS",
-      "NodeJS",
-      "ExpressJS",
-      "MongoDB",
-      "Mongoose",
-      "MySQL",
-      "RESTful API",
-      "UX/UI",
-      "Figma",
-      "Adobe XD",
-    ],
-  },
+  aboutMe: String,
+
+  skills:[String],
+
 });
 
 let UserModel = model("user", userSchema);
