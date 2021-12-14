@@ -21,7 +21,7 @@ router.get("/jobs", (req, res) => {
 router.post("/add-form", (req, res) => {
   const id = req.session.loggedInUser._id;
   console.log(id);
- 
+
   const {
     jobTitle,
     jobDescription,
@@ -33,7 +33,7 @@ router.post("/add-form", (req, res) => {
   } = req.body;
   console.log(req.body);
 
-  let allSkills = skills.split(",")
+  let allSkills = skills.split(",");
 
   JobModel.create({
     username: id,
@@ -94,7 +94,7 @@ router.patch(`/jobs/:id`, (req, res) => {
     completed,
     accepted,
   } = req.body;
-  let allSkills = skills.split(",")
+  let allSkills = skills.split(",");
   JobModel.findByIdAndUpdate(
     id,
     {
@@ -103,10 +103,31 @@ router.patch(`/jobs/:id`, (req, res) => {
         jobTitle,
         jobDescription,
         skills: allSkills,
-
         deadline,
         price,
         completed,
+        accepted,
+      },
+    },
+    { new: true }
+  )
+
+    .then((jobs) => {
+      res.status(200).json(jobs);
+    })
+    .catch((err) => {});
+});
+
+// update jobcard - set developer and accepted to true
+router.patch(`/yourjobs`, (req, res) => {
+  const { id, developer } = req.session.loggedInUser._id;
+  const { accepted } = req.body;
+
+  JobModel.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        developer,
         accepted,
       },
     },

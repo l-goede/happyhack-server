@@ -18,34 +18,10 @@ const jobSchema = new Schema({
 
   jobDescription: String,
 
-<<<<<<< HEAD
   skills: {
-    type: String,
-    enum: [
-      "Javascript",
-      "React",
-      "Typescript",
-      "Python",
-      "C#",
-      "Java",
-      "PHP",
-      "Angular",
-      "VueJS",
-      "NodeJS",
-      "ExpressJS",
-      "MongoDB",
-      "Mongoose",
-      "MySQL",
-      "RESTful API",
-      "UX/UI",
-      "Figma",
-      "Adobe XD",
-    ],
+    type: [String],
+  
   },
-=======
-  skills: [String],
-
->>>>>>> 01caee590e7837acc34cff7e931d0b05620d58ac
 
   deadline: Date,
 
