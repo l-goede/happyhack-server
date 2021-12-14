@@ -19,6 +19,7 @@ const jobSchema = new Schema({
   jobDescription: String,
 
   skills: {
+    type: String,
     enum: [
       "Javascript",
       "React",
