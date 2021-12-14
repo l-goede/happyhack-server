@@ -1,26 +1,21 @@
 const { Schema, model } = require("mongoose");
+require('./User.model')
+require('./Conversation.model')
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
-const msgSchema = new Schema({
-  name: {
-    type: Schema.Types.ObjectId,
-    ref: "Item",
+let MessageSchema = new Schema({
+  sender: {
+    ref: 'User',
+    type: Schema.Types.ObjectId
   },
-  messages: [
-    {
-      sender: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-      message: {
-        type: String,
-        required: true,
-      },
-      timestamp: Date,
-    },
-  ],
-});
+  message: String,
+  conversationId : {
+    ref: 'conversation',
+    type: Schema.Types.ObjectId
+  } 
+}, {
+  timestamps: true
+})
 
-const MsgModel = model("Msg", msgSchema);
+let MessageModel = model('message', MessageSchema)
 
-module.exports = MsgModel;
+module.exports = MessageModel

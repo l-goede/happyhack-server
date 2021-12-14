@@ -18,7 +18,9 @@ const jobSchema = new Schema({
 
   jobDescription: String,
 
+<<<<<<< HEAD
   skills: {
+    type: String,
     enum: [
       "Javascript",
       "React",
@@ -40,6 +42,10 @@ const jobSchema = new Schema({
       "Adobe XD",
     ],
   },
+=======
+  skills: [String],
+
+>>>>>>> 01caee590e7837acc34cff7e931d0b05620d58ac
 
   deadline: Date,
 
