@@ -28,28 +28,8 @@ const userSchema = new Schema({
     type: Array,
   },
 
-  skills: {
-    enum: [
-      "Javascript",
-      "React",
-      "Typescript",
-      "Python",
-      "C#",
-      "Java",
-      "PHP",
-      "Angular",
-      "VueJS",
-      "NodeJS",
-      "ExpressJS",
-      "MongoDB",
-      "Mongoose",
-      "MySQL",
-      "RESTful API",
-      "UX/UI",
-      "Figma",
-      "Adobe XD",
-    ],
-  },
+  skills: [String],
+  
 });
 
 let UserModel = model("user", userSchema);

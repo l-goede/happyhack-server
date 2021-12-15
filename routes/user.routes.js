@@ -39,7 +39,7 @@ router.patch("/profile/:id", isLoggedIn, (req, res) => {
   let id = req.params.id;
   console.log(id)
   const { name, location, image } = req.body;
-
+  let allSkills = skills.split(",")
   UserModel.findByIdAndUpdate(
     id,
     {
@@ -47,7 +47,7 @@ router.patch("/profile/:id", isLoggedIn, (req, res) => {
         name: name,
         location: location,
         image: image,
-        //skills: skills,
+        skills: allSkills,
       },
     },
     { new: true }

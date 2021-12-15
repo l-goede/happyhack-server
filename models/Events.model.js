@@ -17,19 +17,8 @@ const eventsSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
   },
-  skills: {
-    enum: [
-      "JavaScrip",
-      "HTML",
-      "MongoDB",
-      "CSS",
-      "UI",
-      "Python",
-      "Tableau",
-      "Design Thinking",
-      "Research",
-    ],
-  },
+  skills: [String],
+  
   details: {
     type: String,
   },
