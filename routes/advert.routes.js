@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 let JobModel = require("../models/Job.model");
+const UserModel = require("../models/User.model");
 
 // to display all jobs
 router.get("/jobs", (req, res) => {
   JobModel.find()
+    .populate("username")
     .then((jobs) => {
       res.status(200).json(jobs);
     })
@@ -47,7 +49,20 @@ router.post("/add-form", (req, res) => {
     accepted,
   })
     .then((response) => {
-      res.status(200).json(response);
+      UserModel.findByIdAndUpdate(
+        id,
+        {
+          $push: { jobsCreated: response._id },
+        },
+        { new: true }
+      )
+        .then(() => {
+          res.status(200).json(response);
+        })
+        .catch((err) => {
+          console.log(err);
+          next(err);
+        });
     })
     .catch((err) => {
       res.status(500).json({
@@ -119,12 +134,12 @@ router.patch(`/jobs/:id`, (req, res) => {
 });
 
 // update jobcard - set developer and accepted to true
-router.patch(`/yourjobs`, (req, res) => {
-  const { id, developer } = req.session.loggedInUser._id;
-  const { accepted } = req.body;
+router.patch(`/yourjobs`, (req, res, next) => {
+  const developer = req.session.loggedInUser._id;
+  const { accepted, jobId } = req.body;
 
   JobModel.findByIdAndUpdate(
-    id,
+    jobId,
     {
       $set: {
         developer,
@@ -135,9 +150,23 @@ router.patch(`/yourjobs`, (req, res) => {
   )
 
     .then((jobs) => {
-      res.status(200).json(jobs);
+      UserModel.findByIdAndUpdate(
+        developer,
+        {
+          $push: { jobsAccepted: jobs._id },
+        },
+        { new: true }
+      )
+        .then(() => {
+          res.status(200).json(jobs);
+        })
+        .catch((err) => {
+          next(err);
+        });
     })
-    .catch((err) => {});
+    .catch((err) => {
+      next(err);
+    });
 });
 
 module.exports = router;

@@ -1,10 +1,17 @@
 const { Schema, model } = require("mongoose");
 
 const eventsSchema = new Schema({
-  name: {
+  image: {
+    type: String,
+    default:
+      "https://i.pinimg.com/474x/5f/3b/48/5f3b486198cb4e1db5729207a666c750.jpg",
+  },
+
+  title: {
     type: String,
   },
-  username: {
+
+  saved: {
     type: Schema.Types.ObjectId,
     ref: "user",
     required: true,
@@ -13,24 +20,8 @@ const eventsSchema = new Schema({
     type: String,
   },
   date: [{ type: Date }],
-  contact: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-  },
-  skills: {
-    enum: [
-      "JavaScrip",
-      "HTML",
-      "MongoDB",
-      "CSS",
-      "UI",
-      "Python",
-      "Tableau",
-      "Design Thinking",
-      "Research",
-    ],
-  },
-  details: {
+
+  description: {
     type: String,
   },
 });
