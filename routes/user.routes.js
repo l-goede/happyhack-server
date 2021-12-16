@@ -62,5 +62,17 @@ router.patch("/profile/:id", isLoggedIn, (req, res) => {
     .catch((err) => {});
 });
 
+router.get("/users", (req, res) => {
+  UserModel.find()
+    .then((users) => {
+      res.status(200).json(users);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: `something went wrong`,
+        message: err,
+      });
+    });
+});
 
 module.exports = router;

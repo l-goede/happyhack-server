@@ -55,6 +55,7 @@ router.post("/add-form", (req, res) => {
         message: err,
       });
     });
+    console.log(allSkills)
 });
 
 // to show only the selected advert with all information
@@ -83,12 +84,12 @@ router.delete(`/jobs/:id`, (req, res) => {
 // to update the data from the advert
 router.patch(`/jobs/:id`, (req, res) => {
   let id = req.params.id;
+  console.log( "heeeeey", id)
   const {
     username,
     jobTitle,
     jobDescription,
     skills,
-
     deadline,
     price,
     completed,

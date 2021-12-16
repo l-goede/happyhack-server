@@ -1,4 +1,5 @@
 const app = require("./app");
+const MessageModel = require('./models/Message.models')
 
 // ℹ️ Sets the PORT for our app to have access to it. If no env has been set, we hard code it to 3000
 const PORT = process.env.PORT || 5005;
@@ -17,14 +18,13 @@ const io = new Server(myServer, {
 //---------------------------------------------------------------
 
 //-------------------SOCKET EVENTS -----------------------------
-
-const MessageModel = require('./models/Message.models')
-
 io.on('connection', (socket) => {
-  console.log('a user connected');
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
-  });
+  });''
+
+ 
 
   socket.on("join_chat", (data) => {
     socket.join(data);
@@ -38,12 +38,18 @@ io.on('connection', (socket) => {
       message: message, 
       conversationId: chatId
     }
+    console.log("new message", newMessage)
     // As the conversation happens, keep saving the messages in the DB
     MessageModel.create(newMessage)
-      .then(() => {
-        socket.to(data.chatId).emit("receive_message", data.content);
+      .then(async () => {
+        let allMessages = await MessageModel.find({conversationId: chatId}).populate('sender')
+        socket.to(data.chatId).emit("receive_message", allMessages);
+
+        
       })
-    
+      let test = "testing here"
+      socket.emit("hello", test);
+
   });
 });
 
