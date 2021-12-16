@@ -59,6 +59,9 @@ app.use("/api", fileUploadRoutes);
 const EventRoutes = require("./routes/event.routes");
 app.use("/api", EventRoutes);
 
+const chatRoutes = require('./routes/chat.routes')
+app.use("/api", chatRoutes);
+
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
   res.sendFile(__dirname + "/public/index.html");

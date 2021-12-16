@@ -3,7 +3,7 @@ require('./User.model')
 
 let ConversationSchema = new Schema({
   participants: [{
-      ref: 'User',
+      ref: 'user',
       type: Schema.Types.ObjectId
     },
   ] 
