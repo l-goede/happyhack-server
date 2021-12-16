@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 require("./Job.model");
+require("./Event.model");
 
 const userSchema = new Schema({
   image: {
@@ -20,9 +21,12 @@ const userSchema = new Schema({
 
   location: String,
 
-  events: {
-    type: Array,
-  },
+  events: [
+    {
+      ref: "Event",
+      type: Schema.Types.ObjectId,
+    },
+  ],
 
   jobsCreated: [
     {

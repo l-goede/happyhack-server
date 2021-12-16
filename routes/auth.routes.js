@@ -125,6 +125,4 @@ const isLoggedIn = (req, res, next) => {
   }
 };
 
-
-
 module.exports = router;

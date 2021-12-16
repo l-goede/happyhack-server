@@ -14,18 +14,17 @@ const eventsSchema = new Schema({
   saved: {
     type: Schema.Types.ObjectId,
     ref: "user",
-    required: true,
   },
   location: {
     type: String,
   },
-  date: [{ type: Date }],
+  date: { type: Date },
 
   description: {
     type: String,
   },
 });
 
-const EventModel = model("Event", userSchema);
+const EventModel = model("Event", eventsSchema);
 
 module.exports = EventModel;

@@ -7,9 +7,8 @@ const UserModel = require("../models/User.model");
 // to display all events
 router.get("/events", (req, res) => {
   EventModel.find()
-
     .then((events) => {
-      res.status(200).json(jobs);
+      res.status(200).json(events);
     })
     .catch((err) => {
       res.status(500).json({
@@ -23,31 +22,20 @@ router.get("/events", (req, res) => {
 router.patch(`/yourevents`, (req, res, next) => {
   const saved = req.session.loggedInUser._id;
   const { eventId } = req.body;
-
-  EventModel.findByIdAndUpdate(
-    eventId,
+  console.log(saved);
+  UserModel.findByIdAndUpdate(
+    saved,
     {
-      $set: {
-        saved,
-      },
+      $push: { events: eventId },
     },
     { new: true }
   )
-
-    .then((events) => {
-      UserModel.findByIdAndUpdate(
-        saved,
-        {
-          $push: { jobsAccepted: events._id },
-        },
-        { new: true }
-      )
-        .then(() => {
+    .then(() => {
+      EventModel.findById(eventId)
+        .then((events) => {
           res.status(200).json(events);
         })
-        .catch((err) => {
-          next(err);
-        });
+        .catch(() => {});
     })
     .catch((err) => {
       next(err);
@@ -56,12 +44,17 @@ router.patch(`/yourevents`, (req, res, next) => {
 
 // delete event from profile
 
-router.delete(`/events/:id`, (req, res) => {
-  JobModel.findByIdAndDelete(req.params.id)
+router.patch(`/events/:id`, (req, res, next) => {
+  console.log(req.session);
+  const saved = req.session.loggedInUser._id;
+  console.log(saved, req.params.id);
+  UserModel.findByIdAndUpdate(saved, { $pull: { events: req.params.id } })
     .then((events) => {
       res.status(200).json(events);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      next(err);
+    });
 });
 
 module.exports = router;

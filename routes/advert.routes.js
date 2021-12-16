@@ -8,6 +8,7 @@ const UserModel = require("../models/User.model");
 router.get("/jobs", (req, res) => {
   JobModel.find()
     .populate("username")
+    .populate("developer")
     .then((jobs) => {
       res.status(200).json(jobs);
     })
@@ -57,7 +58,15 @@ router.post("/add-form", (req, res) => {
         { new: true }
       )
         .then(() => {
-          res.status(200).json(response);
+          JobModel.findById(response._id)
+            .populate("username")
+            .then((newResponse) => {
+              res.status(200).json(newResponse);
+            })
+            .catch((err) => {
+              console.log(err);
+              next(err);
+            });
         })
         .catch((err) => {
           console.log(err);

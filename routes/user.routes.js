@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const UserModel = require("../models/User.model");
 
-
-
 // to display profile information
 const isLoggedIn = (req, res, next) => {
   if (req.session.loggedInUser) {
@@ -19,27 +17,30 @@ const isLoggedIn = (req, res, next) => {
 
 // to display profile information
 router.get("/profile", isLoggedIn, (req, res, next) => {
-     res.status(200).json(req.session.loggedInUser);
-     console.log("its connecting")
-   });
+  UserModel.findById(req.session.loggedInUser._id)
+    .populate("events")
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 // add new info in user profile
-
-
 
 router.post("/profile/:userId", isLoggedIn, (req, res) => {
   const { name, location, image } = req.body;
 });
-
 
 // to update (and add) profile details
 // needs to add SKILLS! marcos say is not working, so we are testing without first.
 
 router.patch("/profile/:id", isLoggedIn, (req, res) => {
   let id = req.params.id;
-  console.log(id)
-  const { name, lastName, location, image, aboutMe, skills} = req.body;
-  let allSkills = skills.split(",")
+  console.log(id);
+  const { name, lastName, location, image, aboutMe, skills } = req.body;
+  let allSkills = skills.split(",");
 
   UserModel.findByIdAndUpdate(
     id,
@@ -56,11 +57,10 @@ router.patch("/profile/:id", isLoggedIn, (req, res) => {
     { new: true }
   )
     .then((profile) => {
-      req.session.loggedInUser = profile
+      req.session.loggedInUser = profile;
       res.status(200).json(profile);
     })
     .catch((err) => {});
 });
-
 
 module.exports = router;
