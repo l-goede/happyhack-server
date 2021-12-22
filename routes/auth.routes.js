@@ -31,7 +31,6 @@ router.post("/signup", (req, res) => {
     }
     */
 
-  // NOTE: We have used the Sync methods here.
   // creating a salt
   let salt = bcrypt.genSaltSync(10);
   let hash = bcrypt.hashSync(password, salt);

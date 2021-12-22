@@ -20,7 +20,7 @@ router.get("/jobs", (req, res) => {
     });
 });
 
-//to create a new
+//to create a new jobcard
 router.post("/add-form", (req, res) => {
   const id = req.session.loggedInUser._id;
   console.log(id);
@@ -79,7 +79,7 @@ router.post("/add-form", (req, res) => {
         message: err,
       });
     });
-    console.log(allSkills)
+  console.log(allSkills);
 });
 
 // to show only the selected advert with all information
@@ -108,7 +108,7 @@ router.delete(`/jobs/:id`, (req, res) => {
 // to update the data from the advert
 router.patch(`/jobs/:id`, (req, res) => {
   let id = req.params.id;
-  console.log( "heeeeey", id)
+  console.log("heeeeey", id);
   const {
     username,
     jobTitle,

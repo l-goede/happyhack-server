@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
       conversationId: chatId,
     };
     console.log("new message", newMessage);
-    // As the conversation happens, keep saving the messages in the DB
+
     MessageModel.create(newMessage).then(async () => {
       let allMessages = await MessageModel.find({
         conversationId: chatId,
@@ -52,5 +52,3 @@ io.on("connection", (socket) => {
     socket.emit("hello", test);
   });
 });
-
-//---------------------------------------------------------------

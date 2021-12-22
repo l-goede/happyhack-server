@@ -59,7 +59,6 @@ let events = [
     description:
       "In this session, attendees/you will learn about the most popular JS frontend library React. I will explain how to get started with React components and how to create a small application using React.",
   },
-  //Marcos
 
   {
     image:
