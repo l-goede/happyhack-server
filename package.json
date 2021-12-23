@@ -2,6 +2,10 @@
   "name": "happyhack-server",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
