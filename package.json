@@ -31,11 +31,7 @@
   "devDependencies": {
     "nodemon": "^2.0.15"
   },
-
-  
   "optionalDependencies": {
     "fsevents": "2.1.2"
   }
-
 }
-
