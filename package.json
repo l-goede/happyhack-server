@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "multer-storage-cloudinary": "^4.0.0",
+    "serve": "^13.0.2",
     "socket.io": "^4.4.0"
   },
   "devDependencies": {
