@@ -35,11 +35,5 @@ module.exports = (app) => {
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
 
-  // Handles access to the public folder
-  app.use(express.static(path.join(__dirname, "..", "public")));
-
   // Handles access to the favicon
-  app.use(
-    favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))
-  );
 };
